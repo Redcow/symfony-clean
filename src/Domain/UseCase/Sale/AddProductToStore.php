@@ -20,6 +20,11 @@ class AddProductToStore
             $request->productPrice
         );
 
+        if($product->price <= 0) {
+            $response->setError("Price can't be negative");
+            return;
+        }
+
         $this->productGateway->saveProduct($product);
 
         $response->setMessage(
